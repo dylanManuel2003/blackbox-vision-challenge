@@ -1,28 +1,124 @@
-:root {
-  --primary: #44D1B3;
-  --red: #E94F4E;
-}
-
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#root {
-  text-align: center;
-  background-color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Arial', sans-serif;
+  background-color: #110027;
   color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-* {
-  box-sizing: border-box;
+h1, h2, h3 {
+  color: #dde4ec;
+}
+
+button {
+  background-color: #f5e023;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #fae955;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background-color: rgb(67, 0, 105);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.answers {
+  list-style-type: none;
+  padding: 0;
+}
+
+.answers li {
+  margin-bottom: 10px;
+}
+
+.answers button {
+  width: 100%;
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.answers button:hover {
+  border-color: #08ee13;
+}
+
+.feedback {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.feedback.correct {
+  color: green;
+}
+
+.feedback.incorrect {
+  color: red;
+}
+
+.question-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.question-meta i {
+  margin-right: 5px;
+  color: #4A90E2;
+}
+
+.category {
+  background-color: #f9f9f9;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.difficulty {
+  background-color: #e9f9f3;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.difficulty.easy {
+  color: #15803d;
+}
+
+.difficulty.medium {
+  color: #fbbf24;
+}
+
+.difficulty.hard {
+  color: #dc2626;
 }
