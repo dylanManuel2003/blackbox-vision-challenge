@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { fetchQuestions, Question } from '../services/api';
 import QuestionComponent from '../components/Question';
-import Score from '../components/Score';
 import ProgressPanel from '../components/ProgressPanel';
 import ResultModal from '../components/ResultModal';
 import StartScreen from '../components/StartScreen';
-
+import { useHistory } from "react-router-dom";
 
 const App: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -13,6 +12,8 @@ const App: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     const loadQuestions = async () => {
@@ -25,7 +26,9 @@ const App: React.FC = () => {
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
-      setScore((prevScore) => prevScore + 10);
+      setScore((prevScore) => (
+        prevScore + (currentQuestion.type === 'boolean' ? 5 : 10)
+      ));
     }
   };
 
@@ -45,41 +48,41 @@ const App: React.FC = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
     setGameOver(false);
+    setUsername('')
+    history.push('/')
   };
 
   const handleShare = () => {
     alert('¡Comparte tu puntaje con tus amigos!');
   };
 
-  if (!username) {
-    return <StartScreen onStart={handleStartGame} />;
-  }
-
-  if (gameOver) {
-    return (
-      <ResultModal score={score} onPlayAgain={handlePlayAgain} onShare={handleShare} />
-    );
-  }
-
-  if (questions.length === 0) {
-    return <div className="container">Loading...</div>;
-  }
-
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <div className="app-container">
-      <ProgressPanel
-        currentQuestionIndex={currentQuestionIndex}
-        totalQuestions={questions.length}
-        score={score}
-      />
-      <QuestionComponent
-        question={currentQuestion}
-        onAnswer={handleAnswer}
-        onNextQuestion={handleNextQuestion}
-      />
-    </div>
+    {!username ? (
+      <StartScreen onStart={handleStartGame} />
+    ) : gameOver ? (
+      <ResultModal score={score} onPlayAgain={handlePlayAgain} onShare={handleShare} />
+    ) : (
+      <>
+        <ProgressPanel
+          currentQuestionIndex={currentQuestionIndex}
+          totalQuestions={questions.length}
+          score={score}
+        />
+        {questions.length > 0 ? (
+          <QuestionComponent
+            question={questions[currentQuestionIndex]}
+            onAnswer={handleAnswer}
+            onNextQuestion={handleNextQuestion}
+          />
+        ) : (
+          <div className="container">Loading...</div>
+        )}
+      </>
+    )}
+  </div>
   );
 };
 

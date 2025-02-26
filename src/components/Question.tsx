@@ -33,16 +33,17 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswer, onNextQuestion 
   };
 
   const decodedQuestion = decodeHtmlEntity(question.question);
+  const decodedCategory = decodeHtmlEntity(question.category);
   const answers = [...question.incorrect_answers, question.correct_answer].sort();
 
   return (
-    <div className="">
+    <div className="container">
       <div className="question">
         <h2>{decodedQuestion}</h2>
         <div className="question-meta">
           <div className="category">
             <i className="fas fa-folder"></i>
-            {question.category}
+            {decodedCategory}
           </div>
           <div className={`difficulty ${question.difficulty}`}>
             <i className="fas fa-signal"></i>
@@ -54,7 +55,7 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswer, onNextQuestion 
         {answers.map((answer, index) => (
           <li key={index}>
             <button onClick={() => handleAnswer(answer)} disabled={selectedAnswer !== null}>
-              {answer}
+              {decodeHtmlEntity(answer)}
             </button>
           </li>
         ))}

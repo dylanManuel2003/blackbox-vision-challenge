@@ -16,7 +16,6 @@ export const fetchQuestions = async (): Promise<Question[]> => {
     const response = await axios.get(API_URL, {
       params: {
         amount: 10,
-        type: 'multiple',
       },
     });
     return response.data.results;
