@@ -1,7 +1,7 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #110027;
-  color: #333;
+  background-color: rgba(5, 5, 5);
+  color: #fff;
   margin: 0;
   padding: 0;
   display: flex;
@@ -15,7 +15,7 @@ h1, h2, h3 {
 }
 
 button {
-  background-color: #f5e023;
+  background-color: rgba(0, 210, 183);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -26,7 +26,7 @@ button {
 }
 
 button:hover {
-  background-color: #fae955;
+  background-color: rgb(38, 216, 167);
 }
 
 button:disabled {
@@ -38,7 +38,7 @@ button:disabled {
   max-width: 600px;
   width: 100%;
   padding: 20px;
-  background-color: #430069;
+  background-color: rgba(15, 15, 15);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-align: center;
@@ -83,7 +83,7 @@ button:disabled {
 }
 
 .answers button:hover {
-  border-color: #08ee13;
+  border-color: #dbfb36;
 }
 
 .feedback {
@@ -145,6 +145,7 @@ button:disabled {
   top: 20px;
   right: 20px;
   background-color: white;
+  color: #000;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -164,8 +165,7 @@ button:disabled {
 }
 
 .modal-content {
-  background-color: white;
-  background-color: #430069;
+  background-color: rgba(15, 15, 15);
   color: #ccc;
   padding: 20px;
   border-radius: 8px;
@@ -227,12 +227,12 @@ button:disabled {
 }
 
 .footer a {
-  color: #F5A623;
+  color: rgba(0, 210, 183);
   text-decoration: none;
   margin-left: 5px;
   transition: color 0.3s;
 }
 
 .footer a:hover {
-  color: #F05A26;
+  color: rgb(115, 226, 134);
 }
