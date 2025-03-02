@@ -1,10 +1,10 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
 interface SessionContextType {
   username: string;
   score: number;
-  setUsername: (username: string) => void;
-  setScore: (score: number) => void;
+  setUsername: Dispatch<SetStateAction<string>>;
+  setScore: Dispatch<SetStateAction<number>>;
 }
 
 export const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -15,7 +15,7 @@ interface SessionProviderProps {
 
 export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
   const [username, setUsername] = useState('');
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState<number>(0);
 
   return (
     <SessionContext.Provider value={{ username, score, setUsername, setScore }}>

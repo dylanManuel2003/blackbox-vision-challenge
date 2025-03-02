@@ -12,10 +12,8 @@ const App: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  
   const history = useHistory();
   
-  console.log(username, score);
   useEffect(() => {
     const loadQuestions = async () => {
       const questions = await fetchQuestions();
@@ -26,11 +24,9 @@ const App: React.FC = () => {
   }, []);
 
   const handleAnswer = (isCorrect: boolean) => {
+    const currentQuestion = questions[currentQuestionIndex];
     if (isCorrect) {
-      const value = (prevScore: number) => (
-        prevScore + (currentQuestion.type === 'boolean' ? 5 : 10)
-      )
-      setScore(value);
+      setScore((prevScore: number) => prevScore + (currentQuestion.type === 'boolean' ? 5 : 10));
     }
   };
 
@@ -65,14 +61,10 @@ const App: React.FC = () => {
     {!username ? (
       <StartScreen onStart={handleStartGame} />
     ) : gameOver ? (
-      <ResultModal score={score} onPlayAgain={handlePlayAgain} onShare={handleShare} />
+      <ResultModal onPlayAgain={handlePlayAgain} onShare={handleShare} />
     ) : (
       <section className="container-game">
-        <ProgressPanel
-          currentQuestionIndex={currentQuestionIndex}
-          totalQuestions={questions.length}
-          score={score}
-        />
+        <ProgressPanel />
         <div className="container-game-questions">
         {questions.length > 0 ? (
           <QuestionComponent

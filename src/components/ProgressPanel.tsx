@@ -1,9 +1,15 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { SessionContext } from '../context/SessionContext';
 
+interface Game {
+  date: string;
+  username: string;
+  score: number;
+}
+
 const ProgressPanel: React.FC = () => {
   const { username, score } = useContext(SessionContext)!;
-  const [gameHistory, setGameHistory] = useState([]);
+  const [gameHistory, setGameHistory] = useState<Game[]>([]);
 
   useEffect(() => {
     const fetchGameHistory = async () => {

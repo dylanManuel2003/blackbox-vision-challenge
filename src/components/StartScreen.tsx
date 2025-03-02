@@ -22,22 +22,24 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart }) => {
   };
 
   return (
-    <div className="container">
-      <h1>¡Bienvenido a QuizBox Vision!</h1>
-      <div className="container-text-start">
-      <input
-        type="text"
-        placeholder="Ingresa tu nombre de usuario"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        onKeyPress={handleKeyPress}
-        className="input-username"
-      />
-      <button onClick={handleStart} className="start-button">
-        Comenzar Juego
-      </button>
+    <section className="container-game-questions">
+      <div className="container">
+        <h1>¡Bienvenido a QuizBox Vision!</h1>
+        <div className="container-text-start">
+        <input
+          type="text"
+          placeholder="Ingresa tu nombre de usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          onKeyPress={handleKeyPress}
+          className="input-username"
+        />
+        <button onClick={handleStart} className="start-button">
+          Comenzar Juego
+        </button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
