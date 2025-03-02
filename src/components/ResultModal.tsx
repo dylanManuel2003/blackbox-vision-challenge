@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { SessionContext } from "../context/SessionContext";
 
 interface ResultModalProps {
-  score: number;
   onPlayAgain: () => void;
   onShare: () => void;
 }
 
-const ResultModal: React.FC<ResultModalProps> = ({ score, onPlayAgain, onShare }) => {
+const ResultModal: React.FC<ResultModalProps> = ({ onPlayAgain, onShare }) => {
+  const { username, score } = useContext(SessionContext)!;
   const shareMessage = `¡Acabo de jugar QuizBox Vision y obtuve ${score} puntos! Únete y juega conmigo: `;
   const gameUrl = window.location.href;
   const fullMessage = encodeURIComponent(shareMessage + gameUrl);
@@ -18,6 +19,29 @@ const ResultModal: React.FC<ResultModalProps> = ({ score, onPlayAgain, onShare }
   const shareOnGmail = () => {
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=&su=¡Juega QuizBox Vision conmigo!&body=${fullMessage}`);
   };
+
+  const saveGameResult = async () => {
+    try {
+      const response = await fetch('https://blackbox-quizbox-api.onrender.com/api/games', {
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, score }),
+      });
+      if (response.ok) {
+        console.log('Juego guardado exitosamente');
+      } else {
+        console.error('Error al guardar el juego');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    }
+  };
+
+  useEffect(() => {
+    saveGameResult();
+  }, []);
 
     return (
         <div className="modal">

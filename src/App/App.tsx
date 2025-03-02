@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { fetchQuestions, Question } from '../services/api';
 import QuestionComponent from '../components/Question';
 import ProgressPanel from '../components/ProgressPanel';
 import ResultModal from '../components/ResultModal';
 import StartScreen from '../components/StartScreen';
+import { SessionContext } from '../context/SessionContext';
 import { useHistory } from "react-router-dom";
 
 const App: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const { username, setUsername, score, setScore } = useContext(SessionContext)!;
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-
+  
   const history = useHistory();
-
+  
+  console.log(username, score);
   useEffect(() => {
     const loadQuestions = async () => {
       const questions = await fetchQuestions();
@@ -26,9 +27,10 @@ const App: React.FC = () => {
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
-      setScore((prevScore) => (
+      const value = (prevScore: number) => (
         prevScore + (currentQuestion.type === 'boolean' ? 5 : 10)
-      ));
+      )
+      setScore(value);
     }
   };
 
@@ -65,12 +67,13 @@ const App: React.FC = () => {
     ) : gameOver ? (
       <ResultModal score={score} onPlayAgain={handlePlayAgain} onShare={handleShare} />
     ) : (
-      <>
+      <section className="container-game">
         <ProgressPanel
           currentQuestionIndex={currentQuestionIndex}
           totalQuestions={questions.length}
           score={score}
         />
+        <div className="container-game-questions">
         {questions.length > 0 ? (
           <QuestionComponent
             question={questions[currentQuestionIndex]}
@@ -80,7 +83,8 @@ const App: React.FC = () => {
         ) : (
           <div className="container">Loading...</div>
         )}
-      </>
+        </div>
+      </section>
     )}
   </div>
   );

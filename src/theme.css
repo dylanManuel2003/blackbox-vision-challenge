@@ -8,6 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2, h3 {
@@ -42,6 +43,30 @@ button:disabled {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-align: center;
+}
+
+.app-container {
+  width: 100vw;
+  display: flex;
+  overflow-x: hidden;
+
+}
+
+.container-game{
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-game-questions{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-text-start {
@@ -141,15 +166,62 @@ button:disabled {
 }
 
 .progress-panel {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: white;
-  color: #000;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 220px;
+  background-color: rgba(15, 15, 15);
+  border-right: 1px solid rgb(38, 216, 167);
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.progress-panel h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: rgb(38, 216, 167);
+}
+
+.progress-panel .session-info {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.progress-panel .session-info p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.progress-panel .game-history {
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.progress-panel .game-history h3 {
+  font-size: 1rem;
   text-align: center;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+.progress-panel .game-history ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.progress-panel .game-history li {
+  padding: 10px;
+  border-bottom: 1px solid rgb(38, 216, 167);
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.progress-panel .game-history li:last-child {
+  border-bottom: none;
 }
 
 .modal {
